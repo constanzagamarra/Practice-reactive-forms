@@ -28,6 +28,7 @@ export class AppComponent {
          Validators.minLength(6)
         ]
       ],
+
       terms: ['',
         [
           Validators.required , 
@@ -37,7 +38,7 @@ export class AppComponent {
     
     });
 
-    this.loadAPI
+   // this.loadAPI
   }
 
   loadAPI():any {

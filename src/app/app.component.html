@@ -1,26 +1,70 @@
-<div>
-  <form [formGroup]="formLogin" (submit)="send">
-  <div>
-    <label for="email" >Email</label>
-    <input type="text" id="email" formControlName="email">
-  </div>
+<div class="container align-items-center mt-5">
+  <div class=" 100vh row offset-* justify-content-center align-items-center mt-5">
+    <div class="col-md-6 justify-content-center colimg">
+        <img src="./../assets/img/log.jpg" width="100%" alt="">
+    </div>
 
-  <div>
-    <label for="password" >Contraseña</label>
-    <input type="password" id="password" formControlName="password">
-  </div>
+    <div class="col-md-5 justify-content-center">
+        <h2>Formulario reactivo Angular</h2>
+        <form [formGroup]="formLogin" (submit)="send()" class="pt-4 pb-4" errorTailor>
+          <!--Email-->
+          <div  class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="text" class="form-control shadow" id="email" formControlName="email">
+          </div>
+          <!--Password-->
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password"  class="form-control shadow" id="password" formControlName="password"
+                   [controlErrorsTpl]="messagePasswordError">
+          </div>
+          <!--Checkbox-->
+          <div class="mb-3 d-flex">
+            <div class="form-check">
+              <input class="form-check-input" formControlName="terms" [controlErrorsTpl]="mensajeError"  type="checkbox" value="" id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault">
+                Terms and Conditions
+              </label>
+           </div>
+          </div>
 
-  <div>
-    <label for="terms" >Terms</label>
-    <input type="checkbox" id="terms" formControlName="terms">
-  </div>
+          <div class="w-100">
+            <button class="btn-primary btn btn-block w-100" [disabled]="formLogin.invalid">Ingresar</button>
+          </div>
+      
+          <div class="w-100 pt-4">
+            <code class="w-100">
+                <b>Estado del formulario:</b> {{formLogin.valid | json}}
+            </code>
+          </div>
+      
+        </form>
 
-  <div>
-    <button [disabled]="formLogin.invalid" type="submit">Send</button>
+    </div>
   </div>
-  </form>
 </div>
 
-<div>
-  Valido: {{formLogin.valid|json}}
-</div>
+
+
+
+
+    <!--- ********************* RAW CONTENT ***************** --->
+
+
+
+<ng-template let-error let-text="text" #messagePasswordError>
+<!--  {{ error | json }} {{ text }}-->
+  <span class="control-error">Error:</span>
+  <div *ngIf="error?.minlength">
+    <i>No cumples con los caracteres minimos que son ({{error?.minlength?.requiredLength}}), ingresaste solo: {{error?.minlength?.actualLength}}</i>
+  </div>
+</ng-template>
+
+
+<ng-template let-error let-text="text" #mensajeError> {{ error | json }} {{ text }} </ng-template>
+
+<ng-template #messageYoutubeError let-error="error">
+  <div class="control-error" *ngIf="error?.pattern?.requiredPattern">
+    <span>No es una url correcta</span>
+  </div>
+</ng-template>
