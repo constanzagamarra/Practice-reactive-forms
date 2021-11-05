@@ -46,25 +46,24 @@
 
 
 
-
-
-    <!--- ********************* RAW CONTENT ***************** --->
-
-
-
+<!--Alertas-->
 <ng-template let-error let-text="text" #messagePasswordError>
-<!--  {{ error | json }} {{ text }}-->
-  <span class="control-error">Error:</span>
+  
   <div *ngIf="error?.minlength">
+   
+    <div class="alert alert-danger" role="alert">
+   
     <i>No cumples con los caracteres minimos que son ({{error?.minlength?.requiredLength}}), ingresaste solo: {{error?.minlength?.actualLength}}</i>
+    </div>
+
+  
   </div>
 </ng-template>
 
 
-<ng-template let-error let-text="text" #mensajeError> {{ error | json }} {{ text }} </ng-template>
+<ng-template let-error let-text="text" #mensajeError>
+  <div class="alert alert-danger" role="alert">
+    {{ text }}
+  </div>  
+ </ng-template>
 
-<ng-template #messageYoutubeError let-error="error">
-  <div class="control-error" *ngIf="error?.pattern?.requiredPattern">
-    <span>No es una url correcta</span>
-  </div>
-</ng-template>

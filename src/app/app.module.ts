@@ -20,7 +20,7 @@ import { AppComponent } from './app.component';
           required: 'Campo Requerido',
           minlength: ({ requiredLength, actualLength }) => 
                       `Expect ${requiredLength} but got ${actualLength}`,
-          invalidAddress: error => `Address isn't valid`
+          invalidAddress: error => `Es invalido`
         }
       }
     })
